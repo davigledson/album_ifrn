@@ -14,8 +14,8 @@ $conexao = new mysqli($localhost,$usuario,$senha,$banco);
 $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 
-var_dump($dados);
-var_dump($_FILES['arquivo']);
+// var_dump($dados);
+// var_dump($_FILES['arquivo']);
 
 
 if(!empty($_FILES['arquivo'])){
@@ -30,8 +30,23 @@ if($upload->uploaded){
 
 }
 
-// function salvar(){
-//     
-//     $query ="INSERT INTO fotos (`:nome`, `caminho`)  VALUES (:nome, caminho)" ;
-// }
+
+   
+        //code...
+    $query ="INSERT INTO fotos (`nome`, `caminho`)  VALUES (?, ?)";
+    $stmt=$conexao->prepare($query);
+    $nome = $dados['nome'];
+    $caminho =  'imgs/' . $_FILES['arquivo']['name'];
+    $stmt->bind_param("ss",$nome,$caminho);
+  
+
+    // Executar a declaração
+if ($stmt->execute()) {
+    echo "Inserção bem-sucedida!";
+} else {
+    echo "Erro na inserção: " . $stmt->error;
+}
+    
+header("Location: index.php");
+exit();
 ?>
