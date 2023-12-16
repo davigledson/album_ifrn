@@ -1,0 +1,20 @@
+{
+    "name": "davig/album_ifrn",
+    "autoload": {
+        "psr-4": {
+            "conexao\\": "conexao.php"
+        },
+        "files": [
+            "conexao.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Davi Gledson",
+            "email": "davigledson@outlook.com"
+        }
+    ],
+    "require": {
+        "verot/class.upload.php": "*"
+    }
+}
