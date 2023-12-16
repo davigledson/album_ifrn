@@ -79,15 +79,41 @@
 </div>
 </nav>
    
-  <main class="container m-2">
-    <div>
-       <a href="imgs/maluco_de_terno.jpeg" data-fancybox="gallery" data-caption="Cara de terno">
+  <main class="m-2">
+    
+       <a href="imgs/maluco_de_terno.jpeg" class="m-2" data-fancybox="gallery" data-caption="Cara de terno">
       <img height="400" width="400" src="imgs/maluco_de_terno.jpeg" />
     </a>
-    <a href="imgs/michel.jpg" data-fancybox="gallery" data-caption="Cara de terno">
+
+    <a href="imgs/michel.jpg" data-fancybox="gallery" class="m-2" data-caption="Michel sendo gabelado pelas meninas">
       <img height="400" width="400" src="imgs/michel.jpg" />
     </a>
-    </div>
+
+    <?php
+    $localhost = 'localhost';
+    $usuario = 'root';
+    $senha = '';
+    $banco = 'album';
+    $conexao = new mysqli($localhost,$usuario,$senha,$banco);
+
+    $resultados =$conexao->query('select * from fotos');
+
+    if($resultados && $resultados->num_rows > 0){
+      while ($row = $resultados->fetch_assoc()) {
+        // Fazer algo com os dados, por exemplo, imprimir na tela
+        echo "
+        <a href='".$row['caminho'] ."' data-fancybox='gallery' class='m-2' data-caption='".$row['nome'] ."'>
+        <img height='400' width='400' src='".$row['caminho'] ."' />
+      </a>
+  
+        ";
+    }
+    }
+    ?>
+
+
+    
+  
    
   </main>
     
